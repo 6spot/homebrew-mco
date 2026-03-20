@@ -2,7 +2,7 @@
   cat > ~/Library/Homebrew/Formula/mco.rb << 'EOF'
   class Mco < Formula
     desc "Multi-CLI Orchestrator - Python 多代理 CLI 编排工具"
-    homepage "https://github.com/mco-org/mco"
+    homepage "https://github.com/6spot/mco"
     head "https://github.com/6spot/mco.git", branch: "main"
 
     depends_on "python@3.12"
