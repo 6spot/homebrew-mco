@@ -1,19 +1,20 @@
-  mkdir -p ~/Library/Homebrew/Formula
-  cat > ~/Library/Homebrew/Formula/mco.rb << 'EOF'
-  class Mco < Formula
-    desc "Multi-CLI Orchestrator - Python 多代理 CLI 编排工具"
-    homepage "https://github.com/6spot/mco"
-    head "https://github.com/6spot/mco.git", branch: "main"
+class Mco < Formula
+ include Language::Python::Virtualenv
 
-    depends_on "python@3.12"
+ desc "Orchestrate AI coding agents. Any prompt. Any agent. Any IDE."
+ homepage "https://github.com/6spot/mco"
+ head "https://github.com/6spot/mco.git", branch: "main"
+ license "MIT"
 
-    def install
-      venv = virtualenv_create(libexec, "python3")
-      venv.pip_install_and_link buildpath
-    end
+ # Python 版本要求 >= 3.10，Homebrew 默认用最新的就行
+ depends_on "python@3.12"
 
-    test do
-      system bin/"mco", "--help"  # 如果项目没有 --help，可改成其他命令测试
-    end
-  end
-  EOF
+ def install
+   virtualenv_install_with_resources
+ end
+
+ test do
+   # 简单测试命令是否存在和 --help 能跑
+   assert_match "MCO", shell_output("#{bin}/mco --help")
+ end
+end
