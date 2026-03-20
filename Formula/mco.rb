@@ -2,11 +2,12 @@ class Mco < Formula
  include Language::Python::Virtualenv
 
  desc "Orchestrate AI coding agents. Any prompt. Any agent. Any IDE."
- homepage "https://github.com/6spot/mco"
- head "https://github.com/6spot/mco.git", branch: "main"
+ homepage "https://github.com/mco-org/mco"
+ url "https://github.com/mco-org/mco/archive/refs/tags/v0.9.1.tar.gz"
+ version "0.9.1"
+ sha256 "8d88587691925d5d22d41d345bb039b6ff382e63a27ca06a7c1a825fdf3a079c"
  license "MIT"
 
- # Python 版本要求 >= 3.10，Homebrew 默认用最新的就行
  depends_on "python@3.12"
 
  def install
@@ -14,7 +15,7 @@ class Mco < Formula
  end
 
  test do
-   # 简单测试命令是否存在和 --help 能跑
    assert_match "MCO", shell_output("#{bin}/mco --help")
+   assert_match "doctor", shell_output("#{bin}/mco doctor")
  end
 end
